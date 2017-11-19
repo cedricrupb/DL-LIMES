@@ -1,0 +1,16 @@
+    BOTTOM = (actor AND female).
+
+    // actors
+    actor(markus).
+    actor(stefan).
+    actor(heinz).
+    actor(bernd).
+    model(anna).
+    model(gabi).
+    model(michelle).
+
+    // movies
+    hasMovie(stefan,markus).
+    hasMovie(markus,anna).
+    hasMovie(bernd,gabi).
+    hasMovie(anna,heinz).
