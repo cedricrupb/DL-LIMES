@@ -19,7 +19,7 @@ public class ConfigLoadedDLDomain implements IDLDomain{
 
     private ILIMESRunner runner;
 
-    public ConfigLoadedDLDomain(IDLDomain base, String cfgFile) throws ConfigurationException {
+    public  ConfigLoadedDLDomain(IDLDomain base, String cfgFile) throws ConfigurationException {
         baseDomain = base;
         config = loadCfg(cfgFile);
     }
