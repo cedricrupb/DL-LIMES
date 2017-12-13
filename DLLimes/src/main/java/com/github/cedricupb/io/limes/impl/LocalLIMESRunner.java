@@ -17,7 +17,7 @@ import java.nio.file.Paths;
  */
 public class LocalLIMESRunner implements ILIMESRunner {
 
-    private static final String TMP_DIR_PREFIX = "dllimes/limes";
+    private static final String TMP_DIR_PREFIX = "limes";
 
     private enum ConfType{
         XML,RDF
@@ -27,6 +27,7 @@ public class LocalLIMESRunner implements ILIMESRunner {
     private String javaHome;
     private String limesJar;
     private ConfType type;
+
 
     public LocalLIMESRunner(IConfigurationWriter writer, String javaHome, String limesJar) {
         this.writer = writer;
@@ -50,7 +51,9 @@ public class LocalLIMESRunner implements ILIMESRunner {
                     javaHome, "-jar", limesJar, confFile, "-f", format, "-o",logging
             );
 
-            return new LocalLIMESJob(builder.start(), conf);
+            builder.inheritIO();
+
+            return new LocalLIMESJob(builder.start(), conf, logging);
 
         }catch(IOException e){
 
