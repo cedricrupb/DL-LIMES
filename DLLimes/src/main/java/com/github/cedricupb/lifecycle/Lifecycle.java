@@ -14,6 +14,7 @@ public class Lifecycle implements Runnable {
                 actualPhase = actualPhase.getNext();
             } catch (Exception e) {
                e.printStackTrace();
+               actualPhase = null;
             }
         }
         onShutdown();

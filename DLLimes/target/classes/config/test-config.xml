@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<config>
-    <interfaces>
-        <dllearner>
-            <type>inMem</type>
-        </dllearner>
-        <limes>
-            <type>local</type>
-            <fileType>RDF</fileType>
-            <javaHome>java</javaHome>
-            <limesJar>./limes.jar</limesJar>
-        </limes>
-    </interfaces>
-    <refine>
-
-    </refine>
-</config>
+<CONFIG>
+    <INTERFACE>
+        <DLLEARNER>
+            <TYPE>InMem</TYPE>
+        </DLLEARNER>
+        <LIMES>
+            <TYPE>InMem</TYPE>
+        </LIMES>
+    </INTERFACE>
+    <REFINE>
+        <PREFIX>
+            <NAMESPACE>http://geovocab.org/geometry#</NAMESPACE>
+            <LABEL>geom</LABEL>
+        </PREFIX>
+        <SOURCE>
+            <ID>mesh</ID>
+            <ENDPOINT>http://mesh.bio2rdf.org/sparql</ENDPOINT>
+            <VAR>?y</VAR>
+            <PAGESIZE>5000</PAGESIZE>
+            <RESTRICTION>?y rdf:type meshr:Concept</RESTRICTION>
+            <PROPERTY>dc:title</PROPERTY>
+            <TYPE>sparql</TYPE>
+        </SOURCE>
+        <TARGET>
+            <ID>linkedct</ID>
+            <ENDPOINT>http://data.linkedct.org/sparql</ENDPOINT>
+            <VAR>?x</VAR>
+            <PAGESIZE>5000</PAGESIZE>
+            <RESTRICTION>?x rdf:type linkedct:condition</RESTRICTION>
+            <PROPERTY>linkedct:condition_name</PROPERTY>
+        </TARGET>
+        <EXAMPLES>
+            <POSITIVE>
+                <SOURCE>mesh:bla1</SOURCE>
+                <TARGET>linkedct:bla1</TARGET>
+            </POSITIVE>
+            <POSITIVE>
+                <SOURCE>mesh:bla2</SOURCE>
+                <TARGET>linkedct:bla2</TARGET>
+            </POSITIVE>
+            <NEGATIVE>
+                <SOURCE>mesh:bla2</SOURCE>
+                <TARGET>linkedct:bla2</TARGET>
+            </NEGATIVE>
+            <NEGATIVE>
+                <SOURCE>mesh:bla2</SOURCE>
+                <TARGET>linkedct:bla2</TARGET>
+            </NEGATIVE>
+        </EXAMPLES>
+    </REFINE>
+</CONFIG>

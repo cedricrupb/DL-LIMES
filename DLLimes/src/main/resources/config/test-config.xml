@@ -2,10 +2,10 @@
 <CONFIG>
     <INTERFACE>
         <DLLEARNER>
-            <TYPE>inMem</TYPE>
+            <TYPE>InMem</TYPE>
         </DLLEARNER>
         <LIMES>
-            <TYPE>inMem</TYPE>
+            <TYPE>InMem</TYPE>
         </LIMES>
     </INTERFACE>
     <REFINE>
@@ -31,11 +31,22 @@
             <PROPERTY>linkedct:condition_name</PROPERTY>
         </TARGET>
         <EXAMPLES>
-            <LOAD type="positive">./positive.txt</LOAD>
-            <POSITIVE>linkedct:bla1</POSITIVE>
-            <POSITIVE>linkedct:bla2</POSITIVE>
-            <NEGATIVE>linkedct:bla3</NEGATIVE>
-            <NEGATIVE>linkedct:bla4</NEGATIVE>
+            <POSITIVE>
+                <SOURCE>mesh:bla1</SOURCE>
+                <TARGET>linkedct:bla1</TARGET>
+            </POSITIVE>
+            <POSITIVE>
+                <SOURCE>mesh:bla2</SOURCE>
+                <TARGET>linkedct:bla2</TARGET>
+            </POSITIVE>
+            <NEGATIVE>
+                <SOURCE>mesh:bla2</SOURCE>
+                <TARGET>linkedct:bla2</TARGET>
+            </NEGATIVE>
+            <NEGATIVE>
+                <SOURCE>mesh:bla2</SOURCE>
+                <TARGET>linkedct:bla2</TARGET>
+            </NEGATIVE>
         </EXAMPLES>
     </REFINE>
 </CONFIG>
