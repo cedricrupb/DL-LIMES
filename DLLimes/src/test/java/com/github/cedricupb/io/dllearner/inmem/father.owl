@@ -16,20 +16,20 @@
     </owl:equivalentClass>
   </owl:Class>
   <owl:ObjectProperty rdf:ID="hasChild"/>
-  <male rdf:ID="markus">
+  <male rdf:ID="markus" rdfs:label="markus">
     <hasChild>
-      <female rdf:ID="anna">
+      <female rdf:ID="anna" rdfs:label="anna">
         <hasChild>
-          <male rdf:ID="heinz"/>
+          <male rdf:ID="heinz" rdfs:label="heinz"/>
         </hasChild>
       </female>
     </hasChild>
   </male>
-  <male rdf:ID="stefan">
+  <male rdf:ID="stefan" rdfs:label="stefan">
     <hasChild rdf:resource="#markus"/>
   </male>
-  <female rdf:ID="michelle"/>
-  <male rdf:ID="martin">
+  <female rdf:ID="michelle" rdfs:label="michelle"/>
+  <male rdf:ID="martin" rdfs:label="martin">
     <hasChild rdf:resource="#heinz"/>
   </male>
 </rdf:RDF>

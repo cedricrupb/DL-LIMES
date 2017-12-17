@@ -16,6 +16,6 @@ public class InMemDLLearnerRunner implements IDLLearnerRunner {
 
         Callable<OWLClassExpression> call = new InMemDLLearnerJob.JobCallable(config);
 
-        return new InMemDLLearnerJob(service.submit(call));
+        return new InMemDLLearnerJob(service, service.submit(call));
     }
 }

@@ -11,9 +11,11 @@ import java.util.Set;
 public class BranchIterationPhase extends APhase {
 
     private IPhase recursion;
+    private IPhase branch;
 
     public BranchIterationPhase(IPhase recursion, IPhase next) {
         super(next);
+        this.branch = this.next;
         this.recursion = recursion;
     }
 
@@ -26,6 +28,7 @@ public class BranchIterationPhase extends APhase {
         int it = (int)state.getProperty("iterations")+1;
 
         if(it >= config.getTerminate().getIteration()){
+            this.next = this.branch;
             return;
         }
 
@@ -33,6 +36,7 @@ public class BranchIterationPhase extends APhase {
         List<SameReference> oldPos = (List<SameReference>) state.getProperty("oldPositive");
 
         if(config.getTerminate().isFixpoint() && isFixpoint(oldPos, nPos)){
+            this.next = this.branch;
             return;
         }
 

@@ -7,7 +7,7 @@ import java.util.Map;
 public class TerminateHandler implements IXMLEventHandler {
     @Override
     public boolean isHandling(String path, String tag) {
-        return path.endsWith("REFINE") && tag.equals("TERMINATE");
+        return path.endsWith("CONFIG") && tag.equals("TERMINATE");
     }
 
     @Override

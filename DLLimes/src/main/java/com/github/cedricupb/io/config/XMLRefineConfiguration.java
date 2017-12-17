@@ -10,6 +10,7 @@ public class XMLRefineConfiguration {
 
     private XMLExampleConfiguration examples;
 
+
     public XMLRefineConfiguration(KBInfo source, KBInfo target, XMLExampleConfiguration examples) {
         this.source = source;
         this.target = target;

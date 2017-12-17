@@ -12,7 +12,7 @@ public class MLConfig {
     private double threshold = 0.9;
     private List<LearningParameter> mlAlgorithmParameters = new ArrayList<>();
     private MLImplementationType mlImplementationType = MLImplementationType.UNSUPERVISED;
-    private String mlTrainingDataFile = null;
+    private String mlTrainingDataFile = new String();
 
     public MLConfig(String mlAlgorithmName, double threshold) {
         this.mlAlgorithmName = mlAlgorithmName;

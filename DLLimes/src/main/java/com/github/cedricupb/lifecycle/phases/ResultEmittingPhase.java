@@ -50,7 +50,7 @@ public class ResultEmittingPhase implements IPhase {
         List<SameReference> pos = (List<SameReference>) state.getProperty("positiveExamples");
 
         AMapping mapping = MappingFactory.createDefaultMapping();
-        mapping.setPredicate("<http://www.w3.org/2002/07/owl#sameAs>");
+        mapping.setPredicate("http://www.w3.org/2002/07/owl#sameAs");
 
         Map<String, HashMap<String, Double>> inMap = mapping.getMap();
 

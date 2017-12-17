@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<config>
-    <limes>
-        <connector config-class="com.github.cedricupb.io.limes.impl.LocalLIMESRunner"
-                    javaHome="java" limesJar="">
-            <writer config-class="org.aksw.limes.core.io.config.writer.RDFConfigurationWriter" />
-        </connector>
-    </limes>
-</config>

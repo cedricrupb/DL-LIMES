@@ -109,6 +109,11 @@ public class ClassLearningPhase implements IPhase {
 
             IDLLearnerJob srcJob = config.getDllearner().execute(dlConfig);
 
+            state.setProperty("srcClass", srcJob.queryResult());
+
+            System.out.println("(Iteration "+state.getProperty("iterations")+") Source class expression: "
+                    + state.getProperty("srcClass"));
+
             dlConfig = DLConfigBuilder.init()
                     .addKnowledgeSource(transform(config.getRefine().getTarget()))
                     .addPositives(tarPos)
@@ -118,8 +123,11 @@ public class ClassLearningPhase implements IPhase {
 
             IDLLearnerJob tarJob = config.getDllearner().execute(dlConfig);
 
-            state.setProperty("srcClass", srcJob.queryResult());
             state.setProperty("targetClass", tarJob.queryResult());
+
+
+            System.out.println("(Iteration "+state.getProperty("iterations")+") Target class expression: "
+                    + state.getProperty("targetClass"));
 
         } catch (ComponentInitException e) {
             e.printStackTrace();

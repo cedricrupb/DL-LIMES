@@ -16,6 +16,6 @@ public class InMemLIMESRunner implements ILIMESRunner {
 
         Callable<AMapping> call = new InMemLIMESJob.JobCallable(conf);
 
-        return new InMemLIMESJob(service.submit(call));
+        return new InMemLIMESJob(service, service.submit(call));
     }
 }

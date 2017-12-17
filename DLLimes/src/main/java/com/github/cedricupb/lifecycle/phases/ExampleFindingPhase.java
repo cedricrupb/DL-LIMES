@@ -7,6 +7,9 @@ import com.github.cedricupb.lifecycle.IPhase;
 import org.aksw.limes.core.io.config.Configuration;
 import org.aksw.limes.core.ml.algorithm.MLImplementationType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ExampleFindingPhase extends APhase {
 
     public ExampleFindingPhase(IPhase next) {
@@ -22,11 +25,30 @@ public class ExampleFindingPhase extends APhase {
 
         XMLRunningConfiguration config = (XMLRunningConfiguration)state.getProperty("configuration");
 
+
+
+        String srcRes = (String)state.getProperty("srcClass");
+        String targetRes = (String)state.getProperty("targetClass");
+
+
         Configuration limesConfig = new Configuration();
 
         limesConfig.getPrefixes().putAll(config.getRefine().getSource().getPrefixes());
         limesConfig.setSourceInfo(config.getRefine().getSource());
+
+        limesConfig.getSourceInfo().setRestrictions(
+                new ArrayList<>(
+                        Arrays.asList(new String[]{srcRes})
+                )
+        );
+
         limesConfig.setTargetInfo(config.getRefine().getTarget());
+
+        limesConfig.getTargetInfo().setRestrictions(
+                new ArrayList<>(
+                        Arrays.asList(new String[]{targetRes})
+                )
+        );
 
         MLConfig ml = config.getMlConfig();
 
@@ -40,11 +62,11 @@ public class ExampleFindingPhase extends APhase {
 
         limesConfig.setAcceptanceFile("wombat_simple_same.nt");
         limesConfig.setAcceptanceThreshold(ml.getThreshold());
-        limesConfig.setAcceptanceRelation("<http://www.w3.org/2002/07/owl#sameAs>");
+        limesConfig.setAcceptanceRelation("http://www.w3.org/2002/07/owl#sameAs");
 
         limesConfig.setVerificationFile("wombat_simple_review.nt");
         limesConfig.setVerificationThreshold(0.5);
-        limesConfig.setVerificationRelation("<http://www.w3.org/2002/07/owl#sameAs>");
+        limesConfig.setVerificationRelation("http://www.w3.org/2002/07/owl#sameAs");
 
         limesConfig.setExecutionEngine("default");
         limesConfig.setExecutionPlanner("default");

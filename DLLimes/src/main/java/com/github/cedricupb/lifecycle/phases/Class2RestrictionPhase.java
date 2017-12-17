@@ -32,7 +32,7 @@ public class Class2RestrictionPhase extends APhase {
         o = state.getProperty("targetClass");
         if(o != null && o instanceof OWLClassExpression){
             OWLClassExpression targetExpr = (OWLClassExpression)o;
-            String targetWhere = transformExpr(targetExpr, config.getRefine().getSource().getVar());
+            String targetWhere = transformExpr(targetExpr, config.getRefine().getTarget().getVar());
             state.setProperty("targetClass", targetWhere);
         }
 
@@ -51,8 +51,9 @@ public class Class2RestrictionPhase extends APhase {
         String restrictions = "";
 
         if(matcher.find()){
-
             restrictions = (str.substring(matcher.end()).trim());
+
+
         }else{
             System.out.println("Problem while extracting Where clause: "+str);
         }

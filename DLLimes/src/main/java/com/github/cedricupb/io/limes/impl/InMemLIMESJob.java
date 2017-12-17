@@ -12,8 +12,10 @@ import java.util.concurrent.*;
 public class InMemLIMESJob implements ILIMESJob {
 
     private Future<AMapping> future;
+    private ExecutorService service;
 
-    InMemLIMESJob(Future<AMapping> future) {
+    InMemLIMESJob(ExecutorService service, Future<AMapping> future) {
+        this.service = service;
         this.future = future;
     }
 
@@ -25,6 +27,8 @@ public class InMemLIMESJob implements ILIMESJob {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        }finally{
+            service.shutdown();
         }
         return null;
     }
@@ -39,6 +43,8 @@ public class InMemLIMESJob implements ILIMESJob {
             e.printStackTrace();
         } catch (TimeoutException e) {
             e.printStackTrace();
+        }finally{
+            service.shutdown();
         }
         return null;
     }

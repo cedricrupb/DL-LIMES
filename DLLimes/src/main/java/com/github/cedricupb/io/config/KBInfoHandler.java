@@ -44,6 +44,10 @@ public class KBInfoHandler implements IXMLEventHandler {
             XMLConfigurationReader.processOptionalProperty(src, (String)childs.get("OPTIONAL_PROPERTY"));
         }
 
+        if(childs.containsKey("TYPE")){
+            src.setType((String)childs.get("TYPE"));
+        }
+
         return src;
     }
 }

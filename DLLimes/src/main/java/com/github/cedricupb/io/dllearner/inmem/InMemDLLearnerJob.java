@@ -14,14 +14,18 @@ import org.semanticweb.owlapi.model.OWLClassExpression;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 public class InMemDLLearnerJob implements IDLLearnerJob {
 
     private Future<OWLClassExpression> future;
+    private ExecutorService service;
 
-    InMemDLLearnerJob(Future<OWLClassExpression> future) {
+    InMemDLLearnerJob(ExecutorService service,
+                      Future<OWLClassExpression> future) {
         this.future = future;
+        this.service = service;
     }
 
     @Override
@@ -34,6 +38,8 @@ public class InMemDLLearnerJob implements IDLLearnerJob {
         } catch (ExecutionException e) {
             e.printStackTrace();
             return null;
+        }finally{
+            service.shutdown();
         }
     }
 

@@ -18,9 +18,26 @@ public class PosNegHandler implements IXMLEventHandler {
         String source = (String) childs.get("SOURCE");
         String target = (String) childs.get("TARGET");
 
+        if(context.containsKey("prefix")){
+            Map<String, String> prefixes = (Map<String, String>)context.get("prefix");
+            source = resolvePrefix(prefixes, source);
+            target = resolvePrefix(prefixes, target);
+        }
+
         return new SameReference(
                 new OWLNamedIndividualImpl(IRI.create(source)),
                 new OWLNamedIndividualImpl(IRI.create(target))
         );
+    }
+
+    private String resolvePrefix(Map<String, String> prefixes, String res){
+        if(res.contains(":")){
+            String pre = res.substring(0, res.indexOf(":"));
+            String rest = res.substring(res.indexOf(":")+1);
+            if(prefixes.containsKey(pre)){
+                return prefixes.get(pre)+rest;
+            }
+        }
+        return res;
     }
 }
