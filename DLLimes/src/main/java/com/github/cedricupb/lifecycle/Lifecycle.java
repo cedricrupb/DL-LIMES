@@ -1,8 +1,19 @@
 package com.github.cedricupb.lifecycle;
 
+import com.github.cedricupb.lifecycle.phases.*;
+
 public class Lifecycle implements Runnable {
+
     protected IPhaseState state;
     protected IPhase actualPhase;
+
+    public Lifecycle(IPhaseState state) {
+        this.state = state;
+    }
+
+    public Lifecycle() {
+        this(new MappedPhaseState());
+    }
 
     @Override
     public void run() {
@@ -21,7 +32,26 @@ public class Lifecycle implements Runnable {
     }
 
     protected void onStartup(){
+        state.setProperty("iterations", 0);
 
+        BlankPhase recursionPoint = new BlankPhase();
+
+        actualPhase = new ConfigLoadingPhase(
+                new FirstIterationSetupPhase(
+                        recursionPoint
+                )
+        );
+
+        recursionPoint.setWrapping(
+                new ClassLearningPhase(
+                        new ExampleFindingPhase(
+                                new BranchIterationPhase(
+                                        recursionPoint,
+                                        new ResultEmittingPhase()
+                                )
+                        )
+                )
+        );
     }
 
     protected void onShutdown(){

@@ -9,11 +9,18 @@ public class XMLRunningConfiguration {
     private IDLLearnerRunner dllearner;
 
     private XMLRefineConfiguration refine;
+    private MLConfig mlConfig;
 
-    public XMLRunningConfiguration(ILIMESRunner limes, IDLLearnerRunner dllearner, XMLRefineConfiguration refine) {
+    private TerminateConfig terminate;
+
+    public XMLRunningConfiguration(ILIMESRunner limes, IDLLearnerRunner dllearner,
+                                   XMLRefineConfiguration refine, TerminateConfig terminate,
+                                   MLConfig config) {
         this.limes = limes;
         this.dllearner = dllearner;
         this.refine = refine;
+        this.terminate = terminate;
+        this.mlConfig = config;
     }
 
     public ILIMESRunner getLimes() {
@@ -26,6 +33,14 @@ public class XMLRunningConfiguration {
 
     public XMLRefineConfiguration getRefine() {
         return refine;
+    }
+
+    public MLConfig getMlConfig() {
+        return mlConfig;
+    }
+
+    public TerminateConfig getTerminate() {
+        return terminate;
     }
 
 

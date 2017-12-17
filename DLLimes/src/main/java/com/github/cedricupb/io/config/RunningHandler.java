@@ -18,9 +18,19 @@ public class RunningHandler implements IXMLEventHandler {
         Map<String, Object> inter = (Map<String, Object>)childs.get("INTERFACE");
         XMLRefineConfiguration refine = (XMLRefineConfiguration)childs.get("REFINE");
 
+        TerminateConfig terminate = (TerminateConfig)childs.get("TERMINATE");
+
+        MLConfig ml;
+
+        if(childs.containsKey("MLALGORITHM")){
+            ml = (MLConfig)childs.get("MLALGORITHM");
+        }else{
+            ml = new MLConfig();
+        }
+
 
         return new XMLRunningConfiguration((ILIMESRunner)inter.get("LIMES"),
                                             (IDLLearnerRunner)inter.get("DLLEARNER"),
-                                            refine);
+                                            refine, terminate, ml);
     }
 }

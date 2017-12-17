@@ -30,6 +30,7 @@
             <RESTRICTION>?x rdf:type linkedct:condition</RESTRICTION>
             <PROPERTY>linkedct:condition_name</PROPERTY>
         </TARGET>
+
         <EXAMPLES>
             <POSITIVE>
                 <SOURCE>mesh:bla1</SOURCE>
@@ -48,5 +49,23 @@
                 <TARGET>linkedct:bla2</TARGET>
             </NEGATIVE>
         </EXAMPLES>
+
+        <MLALGORITHM>
+            <NAME>wombat simple</NAME>
+            <THRESHOLD>0.9</THRESHOLD>
+            <TYPE>supervised batch</TYPE>
+            <TRAINING>trainingData.nt</TRAINING>
+            <PARAMETER>
+                <NAME>max execution time in minutes</NAME>
+                <VALUE>60</VALUE>
+            </PARAMETER>
+        </MLALGORITHM>
+
+
+        <TERMINATE>
+            <ITERATION>3</ITERATION>
+            <FIXPOINT>TRUE</FIXPOINT>
+            <FILE>same_examples.nt</FILE>
+        </TERMINATE>
     </REFINE>
 </CONFIG>

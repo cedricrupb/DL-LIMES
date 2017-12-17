@@ -4,7 +4,6 @@ import com.github.cedricupb.io.config.XMLConfigLoader;
 import com.github.cedricupb.lifecycle.IPhase;
 import com.github.cedricupb.lifecycle.IPhaseState;
 
-import java.io.IOException;
 
 public class ConfigLoadingPhase implements IPhase {
 

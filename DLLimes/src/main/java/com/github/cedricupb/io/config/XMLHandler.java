@@ -70,12 +70,21 @@ public class XMLHandler extends DefaultHandler {
         if(handlerStack.peek().tag.equals(qName)){
             path.pop();
             ActHandler handler = handlerStack.pop();
-            Object o = handler.handler.handle(
-                    handler.tag,
-                    handler.attributes,
-                    handler.childs,
-                    context
-            );
+
+
+            Object o = null;
+            try {
+                o = handler.handler.handle(
+                        handler.tag,
+                        handler.attributes,
+                        handler.childs,
+                        context
+                );
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
             if(handler.parent != null){
                 Map<String, Object> childs = handler.parent.childs;
                 if(!childs.containsKey(qName)){

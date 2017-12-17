@@ -23,6 +23,9 @@ public class XMLConfigLoader {
             handler.getHandlers().add(new KBInfoHandler());
             handler.getHandlers().add(new DLHandler());
             handler.getHandlers().add(new LIMESHandler());
+            handler.getHandlers().add(new TerminateHandler());
+            handler.getHandlers().add(new MLParameterHandler());
+            handler.getHandlers().add(new MLLoadingHandler());
             handler.getHandlers().add(new PrefixHandler());
             handler.getHandlers().add(new DefaultXMLHandler());
         }

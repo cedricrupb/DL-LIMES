@@ -3,6 +3,9 @@ package com.github.cedricupb;
 import com.github.cedricupb.config.ConfigLoadedDLDomain;
 import com.github.cedricupb.config.DefaultDLDomain;
 import com.github.cedricupb.config.IDLDomain;
+import com.github.cedricupb.lifecycle.IPhaseState;
+import com.github.cedricupb.lifecycle.Lifecycle;
+import com.github.cedricupb.lifecycle.phases.MappedPhaseState;
 import org.apache.commons.cli.*;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
@@ -10,47 +13,42 @@ public class DLLimes {
 
 
     public static void main(String[] args){
-        IDLDomain domain = onStartup(args);
-        while (run(domain)) {
-
-        }
-        onShutdown(domain);
-    }
-
-    private static void printHelp(IDLDomain domain){
-
-    }
-
-    private static IDLDomain onStartup(String[] args) {
-        IDLDomain domain = new DefaultDLDomain();
+        Options options = getCLIOptions();
         CommandLineParser parser = new DefaultParser();
 
         CommandLine cmd = null;
         try {
-            cmd = parser.parse(domain.getCLIOptions(), args);
+            cmd = parser.parse(options, args);
         } catch (ParseException e) {
-            printHelp(domain);
+            printHelp(options);
         }
 
         if(cmd.hasOption("c")){
-            try {
-                domain = new ConfigLoadedDLDomain(domain, cmd.getOptionValue("c"));
-            }catch(ConfigurationException e){
-                System.out.println(cmd.getOptionValue("c")+" is not loadable.");
-            }
+            String file = cmd.getOptionValue("c");
+            IPhaseState state = new MappedPhaseState();
+            state.setProperty("configuration", file);
+
+            Lifecycle cycle = new Lifecycle(state);
+            cycle.run();
+
         }
 
+    }
 
-        return domain;
+    private static void printHelp(Options options){
 
     }
 
-    private static boolean run(IDLDomain domain){
-        return false;
+
+    private static Options getCLIOptions() {
+
+        Options options = new Options();
+
+        options.addOption("c", true, "Configuration file for DLLimes Interfaces");
+
+        return options;
     }
 
-    private static void onShutdown(IDLDomain domain){
 
-    }
 
 }
