@@ -44,11 +44,13 @@ public class Lifecycle implements Runnable {
 
         recursionPoint.setWrapping(
                 new ClassLearningPhase(
-                        new ExampleFindingPhase(
-                                new BranchIterationPhase(
-                                        recursionPoint,
-                                        new ResultEmittingPhase()
-                                )
+                        new ExtendingBranchPhase(
+                            new ExampleFindingPhase(
+                                    new BranchIterationPhase(
+                                            recursionPoint,
+                                            new ResultEmittingPhase()
+                                    )
+                            )
                         )
                 )
         );

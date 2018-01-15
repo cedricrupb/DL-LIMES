@@ -30,7 +30,6 @@
             <ID>father</ID>
             <ENDPOINT>/Users/cedricrichter/Documents/DL-LIMES/DLLimes/src/test/java/com/github/cedricupb/io/dllearner/inmem/father.owl</ENDPOINT>
             <VAR>?x</VAR>
-            <PROPERTY>rdfs:label</PROPERTY>
             <PAGESIZE>2000</PAGESIZE>
             <TYPE>xml</TYPE>
         </SOURCE>
@@ -39,7 +38,6 @@
             <ENDPOINT>/Users/cedricrichter/Documents/DL-LIMES/DLLimes/src/test/java/com/github/cedricupb/io/dllearner/inmem/father.owl</ENDPOINT>
             <VAR>?y</VAR>
             <PAGESIZE>2000</PAGESIZE>
-            <PROPERTY>rdfs:label</PROPERTY>
             <TYPE>xml</TYPE>
         </TARGET>
 
