@@ -4,10 +4,7 @@ import org.aksw.limes.core.io.config.KBInfo;
 import org.aksw.limes.core.io.config.reader.xml.XMLConfigurationReader;
 import org.xml.sax.Attributes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class KBInfoHandler implements IXMLEventHandler {
     @Override
@@ -32,16 +29,20 @@ public class KBInfoHandler implements IXMLEventHandler {
         src.setEndpoint((String)childs.get("ENDPOINT"));
         src.setVar((String)childs.get("VAR"));
         src.setPageSize(Integer.parseInt((String)childs.get("PAGESIZE")));
-        src.setRestrictions(
-                new ArrayList<String>(
-                        Arrays.asList(new String[]{(String)childs.get("RESTRICTION")})
-                )
-        );
+        if(childs.containsKey("RESTRICTION")) {
+            src.setRestrictions(
+                    new ArrayList<String>(
+                            Arrays.asList(new String[]{(String) childs.get("RESTRICTION")})
+                    )
+            );
+        }
         if(childs.containsKey("PROPERTY")) {
-            XMLConfigurationReader.processProperty(src, (String)childs.get("PROPERTY"));
+            for(String prop: iterate(childs.get("PROPERTY"), String.class))
+                XMLConfigurationReader.processProperty(src, prop);
         }
         if(childs.containsKey("OPTIONAL_PROPERTY")) {
-            XMLConfigurationReader.processOptionalProperty(src, (String)childs.get("OPTIONAL_PROPERTY"));
+            for(String prop: iterate(childs.get("OPTIONAL_PROPERTY"), String.class))
+                XMLConfigurationReader.processOptionalProperty(src, prop);
         }
 
         if(childs.containsKey("TYPE")){
@@ -49,5 +50,16 @@ public class KBInfoHandler implements IXMLEventHandler {
         }
 
         return src;
+    }
+
+    private <T> Iterable<? extends T> iterate(Object o, Class<? extends T> clazz){
+
+        if(o instanceof Iterable){
+            return (Iterable<? extends T>)o;
+        }
+
+        List<T> list = new ArrayList<>();
+        list.add((T)o);
+        return list;
     }
 }
