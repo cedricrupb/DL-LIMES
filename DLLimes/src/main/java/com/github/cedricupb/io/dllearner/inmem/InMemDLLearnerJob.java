@@ -4,12 +4,16 @@ import com.github.cedricupb.config.dllearner.IDLConfiguration;
 import com.github.cedricupb.io.dllearner.IDLLearnerJob;
 import org.dllearner.algorithms.celoe.CELOE;
 import org.dllearner.core.AbstractClassExpressionLearningProblem;
+import org.dllearner.core.AbstractReasonerComponent;
 import org.dllearner.core.KnowledgeSource;
 import org.dllearner.core.Score;
 import org.dllearner.kb.OWLFile;
+import org.dllearner.kb.SparqlEndpointKS;
+import org.dllearner.kb.sparql.SparqlKnowledgeSource;
 import org.dllearner.learningproblems.PosNegLPStandard;
 import org.dllearner.learningproblems.PosOnlyLP;
 import org.dllearner.reasoning.ClosedWorldReasoner;
+import org.dllearner.reasoning.SPARQLReasoner;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 
 import java.util.concurrent.Callable;
@@ -56,7 +60,16 @@ public class InMemDLLearnerJob implements IDLLearnerJob {
         @Override
         public OWLClassExpression call() throws Exception {
 
-            ClosedWorldReasoner reasoner = new ClosedWorldReasoner();
+            AbstractReasonerComponent reasoner = null;
+
+            for(KnowledgeSource ks: config.getSources()){
+                if(ks instanceof SparqlEndpointKS || ks instanceof SparqlKnowledgeSource) {
+                    reasoner = new SPARQLReasoner();
+                    break;
+                }
+            }
+            if(reasoner == null)
+                reasoner = new ClosedWorldReasoner();
 
             reasoner.setSources(config.getSources());
             reasoner.init();

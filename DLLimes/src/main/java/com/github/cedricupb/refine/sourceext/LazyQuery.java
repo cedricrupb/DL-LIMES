@@ -2,7 +2,6 @@ package com.github.cedricupb.refine.sourceext;
 
 import org.aksw.limes.core.io.config.KBInfo;
 import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -22,7 +21,6 @@ public class LazyQuery implements Iterable<QuerySolution> {
     }
 
 
-    @NotNull
     @Override
     public Iterator<QuerySolution> iterator() {
         return new QueryIterator();

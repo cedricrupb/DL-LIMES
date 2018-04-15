@@ -21,31 +21,47 @@
             <NAMESPACE>rdfs</NAMESPACE>
             <LABEL>http://www.w3.org/2000/01/rdf-schema#</LABEL>
         </PREFIX>
+        <PREFIX>
+            <NAMESPACE>http</NAMESPACE>
+            <LABEL>http</LABEL>
+        </PREFIX>
+        <PREFIX>
+            <NAMESPACE>dbo</NAMESPACE>
+            <LABEL>http://dbpedia.org/ontology/</LABEL>
+        </PREFIX>
+        <PREFIX>
+            <NAMESPACE>dbr</NAMESPACE>
+            <LABEL>http://dbpedia.org/resource/</LABEL>
+        </PREFIX>
+        <PREFIX>
+            <NAMESPACE>dbw</NAMESPACE>
+            <LABEL>http://wikidata.dbpedia.org/resource/</LABEL>
+        </PREFIX>
 
 
         <SOURCE>
-            <ID>father</ID>
-            <ENDPOINT>/Users/cedricrichter/Documents/DL-LIMES/DLLimes/src/test/java/com/github/cedricupb/io/dllearner/inmem/father.owl</ENDPOINT>
+            <ID>dbp</ID>
+            <ENDPOINT>/dump/file/path/here</ENDPOINT>
             <VAR>?x</VAR>
             <PAGESIZE>2000</PAGESIZE>
-            <TYPE>xml</TYPE>
+            <TYPE>N3</TYPE>
         </SOURCE>
         <TARGET>
-            <ID>father</ID>
-            <ENDPOINT>/Users/cedricrichter/Documents/DL-LIMES/DLLimes/src/test/java/com/github/cedricupb/io/dllearner/inmem/father.owl</ENDPOINT>
+            <ID>dbw</ID>
+            <ENDPOINT>/dump/file/path/here</ENDPOINT>
             <VAR>?y</VAR>
             <PAGESIZE>2000</PAGESIZE>
-            <TYPE>xml</TYPE>
+            <TYPE>N3</TYPE>
         </TARGET>
 
         <EXAMPLES>
             <POSITIVE>
-                <SOURCE>father:martin</SOURCE>
-                <TARGET>father:martin</TARGET>
+                <SOURCE>dbr:Andreas_Ekberg</SOURCE>
+                <TARGET>dbw:Andreas_Ekberg</TARGET>
             </POSITIVE>
             <NEGATIVE>
-                <SOURCE>father:heinz</SOURCE>
-                <TARGET>father:anna</TARGET>
+                <SOURCE>dbr:Daryl_Homer</SOURCE>
+                <TARGET>dbw:Barry_James</TARGET>
             </NEGATIVE>
         </EXAMPLES>
     </REFINE>
@@ -64,6 +80,6 @@
     <TERMINATE>
         <ITERATION>2</ITERATION>
         <FIXPOINT>TRUE</FIXPOINT>
-        <FILE>/Users/cedricrichter/Documents/DL-LIMES/DLLimes/src/main/resources/config/same_father.nt</FILE>
+        <FILE>/Users/cedricrichter/Documents/DL-LIMES/DLLimes/src/main/resources/config/same_person.nt</FILE>
     </TERMINATE>
 </CONFIG>
