@@ -1,6 +1,7 @@
 package com.github.cedricupb.lifecycle.phases;
 
 import com.github.cedricupb.io.config.XMLConfigLoader;
+import com.github.cedricupb.io.config.XMLRunningConfiguration;
 import com.github.cedricupb.lifecycle.IPhase;
 import com.github.cedricupb.lifecycle.IPhaseState;
 
@@ -42,13 +43,24 @@ public class ConfigLoadingPhase implements IPhase {
 
         System.out.println("Start loading configuration...");
 
-        String confFile = (String)state.getProperty("configuration");
-        XMLConfigLoader loader = new XMLConfigLoader();
+        XMLRunningConfiguration config;
+        String confFile = "";
 
-        state.setProperty("configuration", loader.load(confFile));
+        Object confObj = state.getProperty("configuration");
+
+        if(confObj instanceof XMLRunningConfiguration){
+            config = (XMLRunningConfiguration)confObj;
+        }else {
+            confFile = (String) state.getProperty("configuration");
+            XMLConfigLoader loader = new XMLConfigLoader();
+            config = loader.load(confFile);
+        }
+
+
+        state.setProperty("configuration", config);
 
         if(state.getProperty("configuration") == null){
-            System.out.println("Cannot load configuration file: "+confFile);
+            System.out.println("Cannot load configuration file"+(confFile.isEmpty()?".":": "+confFile));
             next = null;
         }
 

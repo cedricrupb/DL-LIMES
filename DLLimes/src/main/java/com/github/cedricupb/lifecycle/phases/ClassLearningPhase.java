@@ -14,6 +14,7 @@ import org.dllearner.core.ComponentInitException;
 import org.dllearner.core.KnowledgeSource;
 import org.dllearner.kb.OWLFile;
 import org.dllearner.kb.SparqlEndpointKS;
+import org.dllearner.kb.sparql.SparqlKnowledgeSource;
 import org.semanticweb.owlapi.model.OWLIndividual;
 
 import java.net.MalformedURLException;
@@ -21,7 +22,9 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ClassLearningPhase implements IPhase {
 
@@ -100,7 +103,7 @@ public class ClassLearningPhase implements IPhase {
         IDLConfiguration dlConfig;
         try {
             dlConfig = DLConfigBuilder.init()
-                    .addKnowledgeSource(transform(config.getRefine().getSource()))
+                    .addKnowledgeSource(transform(config.getRefine().getSource(), srcPos))
                     .addPositives(srcPos)
                     .addNegatives(srcNeg)
                     .setMaxExecutionTimeInSeconds(2)
@@ -115,7 +118,7 @@ public class ClassLearningPhase implements IPhase {
                     + state.getProperty("srcClass"));
 
             dlConfig = DLConfigBuilder.init()
-                    .addKnowledgeSource(transform(config.getRefine().getTarget()))
+                    .addKnowledgeSource(transform(config.getRefine().getTarget(), tarPos))
                     .addPositives(tarPos)
                     .addNegatives(tarNeg)
                     .setMaxExecutionTimeInSeconds(2)
@@ -140,7 +143,7 @@ public class ClassLearningPhase implements IPhase {
         running = false;
     }
 
-    private KnowledgeSource transform(KBInfo info) throws ComponentInitException, MalformedURLException {
+    private KnowledgeSource transform(KBInfo info, List<OWLIndividual> examples) throws ComponentInitException, MalformedURLException {
         if(Files.exists(Paths.get(info.getEndpoint()))){
             OWLFile ks = new OWLFile();
             ks.setFileName(info.getEndpoint());
@@ -149,6 +152,7 @@ public class ClassLearningPhase implements IPhase {
         }else{
             SparqlEndpointKS ks = new SparqlEndpointKS();
             ks.setUrl(new URL(info.getEndpoint()));
+
             ks.init();
             return ks;
         }

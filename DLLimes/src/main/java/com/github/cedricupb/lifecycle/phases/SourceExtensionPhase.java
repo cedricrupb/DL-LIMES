@@ -9,13 +9,10 @@ import com.github.cedricupb.refine.sourceext.SimpleSimilaritySet;
 import org.aksw.limes.core.io.cache.Instance;
 import org.aksw.limes.core.io.config.KBInfo;
 import org.aksw.limes.core.io.config.reader.xml.XMLConfigurationReader;
-import org.aksw.limes.core.io.query.ModelRegistry;
 import org.aksw.limes.core.measures.measure.IMeasure;
 import org.aksw.limes.core.measures.measure.MeasureFactory;
 import org.aksw.limes.core.measures.measure.MeasureType;
-import org.aksw.limes.core.measures.measure.string.JaccardMeasure;
 import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.semanticweb.owlapi.model.OWLIndividual;
@@ -67,6 +64,7 @@ public class SourceExtensionPhase extends APhase {
                         double f = fmeasure(posScore, negScore, positive.size());
 
                         if(f >= theta){
+                            System.out.println("Applicable property:\nSource: "+src+"\n Target:"+tar);
                             srcOut.add(src);
                             targetOut.add(tar);
                             break;

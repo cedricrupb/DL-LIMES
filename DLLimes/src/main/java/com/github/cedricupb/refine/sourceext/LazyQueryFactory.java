@@ -2,9 +2,7 @@ package com.github.cedricupb.refine.sourceext;
 
 import org.aksw.limes.core.io.config.KBInfo;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class LazyQueryFactory {
