@@ -6,7 +6,10 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import java.util.Collections;
 import java.util.Set;
 
+/* Making the configurations that can be used to run DL Learner. */
+
 public class DLConfiguration implements IDLConfiguration{
+
 
     private Set<KnowledgeSource> ks;
     private Set<OWLIndividual> pos;
@@ -24,6 +27,7 @@ public class DLConfiguration implements IDLConfiguration{
     }
 
 
+    // setting the values of the variables
     @Override
     public Set<KnowledgeSource> getSources() {
         return Collections.unmodifiableSet(ks);

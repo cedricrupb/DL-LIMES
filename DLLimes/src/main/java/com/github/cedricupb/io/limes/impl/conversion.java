@@ -24,7 +24,7 @@ public class conversion implements IConversion {
     private OWLClassExpression expr;
 
 
-
+// running the dl learner to get the OWL class expression.
     public void dlExecute() throws Exception {
         String uriPrefix = "http://example.com/father#";
 
@@ -55,8 +55,6 @@ public class conversion implements IConversion {
 
     //to convert the OWL class expression into SPARQL quesry using the DL-Learner class.
 
-
-
     @Override
     public String owlTOSparql(OWLClassExpression ce) {
         OWLClassExpressionToSPARQLConverter converter = new OWLClassExpressionToSPARQLConverter();
@@ -69,7 +67,7 @@ public class conversion implements IConversion {
     }
 
 
-    // to extract the string after the where clause
+    // Extracting the where clause(rules) from the SPARQL query so that they can be passed to Limes.
 
 
     @Override

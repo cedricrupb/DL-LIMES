@@ -11,7 +11,6 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
-
 public class ConfigLoadedDLDomain implements IDLDomain{
 
     private IDLDomain baseDomain;
@@ -19,11 +18,13 @@ public class ConfigLoadedDLDomain implements IDLDomain{
 
     private ILIMESRunner runner;
 
+    // getting the configuration file
     public  ConfigLoadedDLDomain(IDLDomain base, String cfgFile) throws ConfigurationException {
         baseDomain = base;
         config = loadCfg(cfgFile);
     }
 
+    // The function will return the XML configuration file.
     private XMLConfiguration loadCfg(String file) throws ConfigurationException {
         Parameters params = new Parameters();
         FileBasedConfigurationBuilder<XMLConfiguration> builder =
@@ -34,11 +35,13 @@ public class ConfigLoadedDLDomain implements IDLDomain{
     }
 
 
+    // Getting the options needed to run the DL Learner .
     @Override
     public Options getCLIOptions() {
         return baseDomain.getCLIOptions();
     }
 
+    //creating the configuration file in run time.
     @Override
     public ILIMESRunner getLimesInterface() {
         if (runner == null){

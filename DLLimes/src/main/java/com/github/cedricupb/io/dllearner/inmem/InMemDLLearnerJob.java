@@ -21,6 +21,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
+// The class runs the DL learner using the configuration options. The class and the methods run
+//in the memory in run time.
+
 public class InMemDLLearnerJob implements IDLLearnerJob {
 
     private Future<OWLClassExpression> future;
@@ -57,6 +60,7 @@ public class InMemDLLearnerJob implements IDLLearnerJob {
         }
 
 
+        // getting the output of the DL learner
         @Override
         public OWLClassExpression call() throws Exception {
 

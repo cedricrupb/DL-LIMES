@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 
 /**
  * Created by Cedric Richter on 11.11.17.
+ * The class will run the limes as a black box.
  */
 public class LocalLIMESRunner implements ILIMESRunner {
 
@@ -35,6 +36,7 @@ public class LocalLIMESRunner implements ILIMESRunner {
         this.limesJar = limesJar;
     }
 
+    /* The method will run the limes using the configuration defined in the ILIMESJob class.*/
     public ILIMESJob execute(Configuration conf) {
         try {
             Path tmpDir = Files.createTempDirectory(TMP_DIR_PREFIX);
@@ -92,6 +94,7 @@ public class LocalLIMESRunner implements ILIMESRunner {
         return outFile;
     }
 
+    /* Creating th default configuration for the limes to run easily.*/
     private Configuration flatCopyConf(Configuration conf){
         return new Configuration(conf.getSourceInfo(), conf.getTargetInfo(), conf.getMetricExpression(),
                 conf.getAcceptanceRelation(), conf.getVerificationRelation(), conf.getAcceptanceThreshold(),

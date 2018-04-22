@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// The class will process the incoming dl learner configuration.
 public class InMemDLLearnerRunner implements IDLLearnerRunner {
     @Override
     public IDLLearnerJob execute(IDLConfiguration config) {

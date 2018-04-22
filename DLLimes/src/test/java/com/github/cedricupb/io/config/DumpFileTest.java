@@ -1,5 +1,6 @@
 package com.github.cedricupb.io.config;
 
+import com.github.cedricupb.Benchmark.Evaluation;
 import com.github.cedricupb.lifecycle.IPhaseState;
 import com.github.cedricupb.lifecycle.Lifecycle;
 import com.github.cedricupb.lifecycle.phases.MappedPhaseState;
@@ -22,4 +23,9 @@ public class DumpFileTest {
         cycle.run();
     }
 
+    @Test
+    public void testdumpfile(){
+        Evaluation qry = new Evaluation();
+        qry.queryExecution();
+    }
 }

@@ -7,8 +7,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+/* The class is building the configuration of the DL Learner using the DLConfiguration class components.*/
+
 public class DLConfigBuilder {
 
+    // building the configurations
     public static DLConfigBuilder init(){
         return new DLConfigBuilder();
     }
@@ -27,6 +30,7 @@ public class DLConfigBuilder {
         maxExec = 1;
     }
 
+    // Making the constructors of the class.
     public DLConfigBuilder addKnowledgeSource(KnowledgeSource ks){
         if(ks != null)
             this.ks.add(ks);
@@ -37,6 +41,9 @@ public class DLConfigBuilder {
         this.ks.addAll(ks);
         return this;
     }
+
+    // The constructor method to check the individuals in the OWL CLASS
+    //and adding them in positive and negative examples examples.
 
     public DLConfigBuilder addPositive(OWLIndividual individual){
         if(individual != null)

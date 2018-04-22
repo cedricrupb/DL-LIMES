@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Cedric Richter on 11.11.17.
+ * Creating the limes configuration so that it can be run on the local machine
  */
 public class LocalLIMESJob implements ILIMESJob {
 
@@ -36,6 +37,8 @@ public class LocalLIMESJob implements ILIMESJob {
         return queryResult(-1, TimeUnit.MILLISECONDS);
     }
 
+    /* Running the limes job for the finite period of time. if the job is taking too much
+    * time then the job will be terminated.*/
     @Override
     public AMapping queryResult(long timeout, TimeUnit unit) {
         try {
@@ -57,6 +60,7 @@ public class LocalLIMESJob implements ILIMESJob {
         return null;
     }
 
+    /* The method will provide us output of the job.*/
     private void printLog(){
         Path p = Paths.get(logFile);
         if(Files.exists(p)){

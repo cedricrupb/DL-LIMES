@@ -7,6 +7,7 @@ public class DefaultDLDomain implements IDLDomain {
 
     private Options options;
 
+    // Defining the command line option of the dl learner
     @Override
     public Options getCLIOptions() {
         if(options == null){

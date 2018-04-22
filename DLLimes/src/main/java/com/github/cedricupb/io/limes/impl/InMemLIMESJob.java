@@ -9,6 +9,7 @@ import org.aksw.limes.core.io.mapping.AMapping;
 
 import java.util.concurrent.*;
 
+// The class run in the Limes using the configuration.
 public class InMemLIMESJob implements ILIMESJob {
 
     private Future<AMapping> future;
@@ -33,6 +34,7 @@ public class InMemLIMESJob implements ILIMESJob {
         return null;
     }
 
+    // The method will call the query result. The method will wait for specified time and then call the results.
     @Override
     public AMapping queryResult(long timeout, TimeUnit unit) {
         try {
@@ -53,11 +55,13 @@ public class InMemLIMESJob implements ILIMESJob {
 
         private Configuration config;
 
+        //
         public JobCallable(Configuration config) {
             this.config = config;
         }
 
 
+        //
         @Override
         public AMapping call() throws Exception {
             return Controller.getMapping(config).getAcceptanceMapping();
