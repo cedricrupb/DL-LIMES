@@ -2,7 +2,8 @@ package com.github.cedricupb.Benchmark;
 
 
 import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdfxml.xmloutput.impl.Abbreviated;
 import java.io.*;
 import java.nio.file.Files;
@@ -20,9 +21,6 @@ public class Evaluation {
 
     List<String> resourselist = new ArrayList<>(); // to save the resources of the class
 
-    private String result;
-    private String res;
-
     private String[] classes =
             {"Publisher", "School", "Abbey", "AcademicConference",
                     "AcademicJournal", "AcademicSubject", "AdultActor"
@@ -38,7 +36,7 @@ public class Evaluation {
 
                             for (int j=0; j<resourselist.size();j++){
                                //if (resourselist.get(j)!= " ") //&& (resourselist.get(j).startsWith("_")))
-                              getResourceDescription("resourselist.get(j)");
+                              getResourceDescription(resourselist.get(j));
                                    //System.out.println(resourselist.get(j));
                             }
 
@@ -67,9 +65,10 @@ public class Evaluation {
             {
                 QuerySolution soln = resource_results.nextSolution() ;
                 RDFNode a = soln.get("r") ;
-                result = a.asNode().getLocalName();
-                res = result.replaceAll("\\s",""); // trying to remove the blank spaces
-                resourselist.add(res);
+                String result = a.asNode()+"";
+                //System.out.println(result);
+                //String res = result.replaceAll("\\s",""); // trying to remove the blank spaces
+                resourselist.add(result);
             }
 
         } finally {
@@ -81,8 +80,8 @@ public class Evaluation {
     public void getResourceDescription(String rname){
 
         String desptstring ="Prefix dbo: <http://dbpedia.org/resource/>\n" +
-                "Describe ?r where{" +
-                "    dbo:"+rname+" ?r ?o." +
+                "Describe ?r  where{" +
+                "    <"+rname+"> ?r ?o." +
                 "}";
 
         Writer writer = null;
@@ -91,12 +90,21 @@ public class Evaluation {
 
         try {
             Model model = des_Exe.execDescribe();
+            //model = (Model) set;
+            //ResultSet description_result = des_Exe.execSelect();
+
             StringWriter strwrt = new StringWriter();
+            //for ( ; description_result.hasNext() ; ) {
+            //QuerySolution res = description_result.nextSolution();
+
             Abbreviated abb = new Abbreviated();
             abb.write(model, strwrt, null);
+            //System.out.println(res);
+
             File file = new File("D:\\newfile.txt");
             file.createNewFile();
-                Files.write(Paths.get("D:\\newfile.txt"),strwrt.toString().getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("D:\\newfile.txt"), strwrt.toString().getBytes(), StandardOpenOption.APPEND);
+            // }
 
         }
 
