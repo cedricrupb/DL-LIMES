@@ -79,9 +79,14 @@ public class Evaluation {
 
     public void getResourceDescription(String rname){
 
-        String desptstring ="Prefix dbo: <http://dbpedia.org/resource/>\n" +
+        String desptstring =
+//                "Prefix dbo: <http://dbpedia.org/resource/>" +
+//                        "SELECT "+rname+" ?r ?o where{"
+//                        +rname+" ?r ?o." +
+//                        "}";
+                "Prefix dbo: <http://dbpedia.org/resource/>" +
                 "Describe ?r  where{" +
-                "    <"+rname+"> ?r ?o." +
+                "?r ?o <"+rname+">." +
                 "}";
 
         Writer writer = null;
@@ -101,9 +106,9 @@ public class Evaluation {
             abb.write(model, strwrt, null);
             //System.out.println(res);
 
-            File file = new File("D:\\newfile.txt");
+            File file = new File("C:\\Users\\Bilal\\Documents\\GitHub\\PG_DL\\DL-LIMES\\DLLimes\\src\\main\\resources\\dumpfile.txt");
             file.createNewFile();
-            Files.write(Paths.get("D:\\newfile.txt"), strwrt.toString().getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("C:\\Users\\Bilal\\Documents\\GitHub\\PG_DL\\DL-LIMES\\DLLimes\\src\\main\\resources\\dumpfile.txt"), strwrt.toString().getBytes(), StandardOpenOption.APPEND);
             // }
 
         }
